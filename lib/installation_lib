@@ -1,0 +1,24 @@
+
+
+pi@levelup:~ $ sudo pip3 install MCP342x
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Collecting MCP342x
+  Downloading https://www.piwheels.org/simple/mcp342x/MCP342x-0.3.5-py2.py3-none-any.whl
+Collecting smbus (from MCP342x)
+  Downloading https://www.piwheels.org/simple/smbus/smbus-1.1.post2-cp37-cp37m-linux_armv7l.whl (43kB)
+    100% |████████████████████████████████| 51kB 400kB/s 
+Installing collected packages: smbus, MCP342x
+Successfully installed MCP342x-0.3.5 smbus-1.1.post2
+pi@levelup:~ $ 
+pi@levelup:~ $ 
+pi@levelup:~ $ pip3 install MCP342x
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Requirement already satisfied: MCP342x in /usr/local/lib/python3.7/dist-packages (0.3.5)
+Requirement already satisfied: smbus in /usr/local/lib/python3.7/dist-packages (from MCP342x) (1.1.post2)
+pi@levelup:~ $ 
+pi@levelup:~ $ 
+
+
+
+https://github.com/jrm224
+

@@ -28,14 +28,6 @@ from lib_python_logging import *
 
 
 
-class CLS_Drinko_DEVICE:
-    DEVICE_ID = 355
-    NBR_TURBINES = 2
-    POWER_SENSOR = 30
-
-
-
-
 TempPress = Array('d', range(9))         # Temperature and Pressure measurements - Global shared inter-process variables
 
 #-----------------------------------------------------------------------  
@@ -316,7 +308,7 @@ def main():
     # Start the Independent Temperature and Pressure measurement process
     try:
         global TempPressPow_Process
-        TempPressPow_Process = Process( target=tempPressPowerMethod, args=(CLS_Drinko_DEVICE.POWER_SENSOR,) )
+        TempPressPow_Process = Process( target=tempPressPowerMethod )
         TempPressPow_Process.start()
         #print("Independent Process Temperature and Pressure started ..")
         ttpp_logger.info("[+] Process Temperature, Pressure and Power started ..")

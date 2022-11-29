@@ -155,43 +155,6 @@ NTC_Temperatures = [999.9, 999.9, 999.9, 999.9]
 
 def tempPressPowerMethod(VOLT_TO_AMP = 30):   # Default 30A <==> 1 V
     
-    '''# ADC ADS1015 12 bits 
-    adc = Adafruit_ADS1x15.ADS1015()
-    adc_2 = Adafruit_ADS1x15.ADS1015(address=0x49, busnum=1)
-    
-    # Sensor Pressure transmitter (0 - 10 Bar)
-    # Model: WNK83MA 
-    # Power: 5V DC 
-    # Output: 0.5-4.5V 
-    # Range: 0-10bar
-    # SN:X200xxx
-    # Calibration parameters
-    k_press1 = 0.00504254868512
-    m_press1 = -1.2533309143329
-    
-    # Power consumption
-    MAX_V = 0.0
-    m = 0.256/2047.0  # Gain 16
-    #m=4.096/2047.0   # Gain 1
-    U_RMS = 230
-    # Default 30A <==> 1 V   VOLT_TO_AMP = 30
-    # Other possible sensors: 20A <==> 1V  or 10A <==> 1V
-    
-    
-    # Choose a gain of 1 for reading voltages from 0 to 4.09V.
-    # Or pick a different gain to change the range of voltages that are read:
-    #  - 2/3 = +/-6.144V
-    #  -   1 = +/-4.096V
-    #  -   2 = +/-2.048V
-    #  -   4 = +/-1.024V    
-    #  -   8 = +/-0.512V
-    #  -  16 = +/-0.256V
-    # See table 3 in the ADS1015/ADS1115 datasheet for more info on gain.
-    GAIN_P = 1
-    GAIN_T = 4
-    GAIN_POW = 16
-    NBR_SAMPLES = 25   # Number of samples: Average measurements (temperature and pressure).'''
-    
    
     while True: # infinite loop
         try:
@@ -200,59 +163,8 @@ def tempPressPowerMethod(VOLT_TO_AMP = 30):   # Default 30A <==> 1 V
             press1 = 999.9; press2 = 999.9; press3 = 999.9; press4 = 999.9; power4 = 999.9;
             
             #--------------------------------------------------------------------------------------
-            # Read Pressure P1, P2, P3, P4 (Sensor Pressure transmitter 10 Bar, WNK83MA ADC12bits).
+            # Read Pressure P1, P2, P3, Pow4 (Sensor Pressure transmitter 10 Bar, WNK83MA ADC18bits).
             
-            '''values = [0,0,0,0]
-
-            try:
-                press_avg = 0; n=0
-                while( n < NBR_SAMPLES  ):
-                    #print("Pressure Start conversion ADC ***********")
-                    values[0] = adc.read_adc(0, gain=GAIN_P)
-                    #print("ADC 0 value : {}".format(values[0]))
-                    press1 =  k_press1*values[0] + m_press1
-                    #print("press1 {}".format(press1))
-                    press_avg = press_avg + press1
-                    n = n + 1
-                press1 = press_avg/NBR_SAMPLES
-                #print("Avg Press1 {} °C".format(press1))
-            except Exception as e:
-                press1 = 999.9 
-                print("Exception Pressure P1 : " + str(e))
-                
-            try:
-                press_avg = 0; n=0 
-                while( n < NBR_SAMPLES ):
-                    #print("Pressure Start conversion ADC ***********")
-                    values[1] = adc.read_adc(1, gain=GAIN_P)
-                    #print("ADC 1 value : {}".format(values[1]))
-                    press2 = k_press1*values[1] + m_press1
-                    #print("press2 {}".format(press2))
-                    press_avg = press_avg + press2
-                    n = n + 1
-                press2 = press_avg/NBR_SAMPLES
-                #print("Avg Press2 {} °C".format(press2))
-            except Exception as e:
-                press2 = 999.9 
-                print("Exception Pressure P2 : " + str(e))
-                
-            try:
-                press_avg = 0; n=0
-                while( n < NBR_SAMPLES ):
-                    #print("Pressure Start conversion ADC ***********")
-                    values[2] = adc.read_adc(2, gain=GAIN_P)
-                    #print("ADC 2 value : {}".format(values[2]))
-                    press3 = k_press1*values[2] + m_press1
-                    #print("press3 {}".format(press3))
-                    press_avg = press_avg + press3
-                    n = n + 1
-                press3 = press_avg/NBR_SAMPLES
-                #print("Avg Press3 {} °C".format(press3))
-            except Exception as e:
-                press3 = 999.9 
-                print("Exception Pressure P3 : " + str(e))'''
-                
-                
             #--------------------------------------------------------------
             # Pressure ADC: Address 0x68
             start_time=time.time()
@@ -283,36 +195,6 @@ def tempPressPowerMethod(VOLT_TO_AMP = 30):   # Default 30A <==> 1 V
             print()
                 
                 
-                
-            '''try:
-                
-                MAX_V = 0.0
-                P = 0.0
-                I_RMS = 0.0
-                V_RMS=0.0
-                vout = 0.0
-                t1=time.time()
-                for i in range(1000):   # 100 x 0.2ms = 20ms 
-                    # Read the specified ADC channel using the previously set gain value.
-                    steps = adc.read_adc(3, gain=GAIN_POW)
-                    vout = m*steps
-                    
-                    if(vout > MAX_V): 
-                        MAX_V = vout
-                    V_RMS = MAX_V/1.41421
-                    I_RMS = V_RMS*VOLT_TO_AMP
-                    P = U_RMS * I_RMS
-                    power4 = P
-                    #print("Power: {}".format(P))
-                    
-            except Exception as e:
-                #press4 = 999.9
-                power4 = 999.9
-                print("Exception Power P4 : " + str(e))'''
-                
-                
-                
-
 
 
             #--------------------------------------------------------------
@@ -361,114 +243,11 @@ def tempPressPowerMethod(VOLT_TO_AMP = 30):   # Default 30A <==> 1 V
                 print("Exception Power P4: ".format(e) )
 
 
-
-
                 
                 
             #--------------------------------------------------------------------------
             # Read temperatures T1, T2, T3, and T4 (4 probes x NTC 10K B3435 ADC12bits)
             
-            '''try:
-                temp_avg = 0; n=0
-                while( n < NBR_SAMPLES ):
-                    #print("Start Temperature 1 conversion ADC")
-                    values[0] = adc_2.read_adc(0, gain=GAIN_T)
-                    #print("NTC Resistor 1 ADC value : {:02.1f}".format(values[0]))
-                    R2 = 1.5  # 1.5 KOhm
-                    Vin = 3    # 3V Vref
-                    vout = (values[0]/2047.0 )*1.024 #4.09
-                    #print("Vout : {:02.3f}".format(vout))
-                    R = R2 * ( (3.0 / vout) -1)
-                    #print("Resistor R : {:02.3f}".format(R))
-                    #1/T = a + b(Ln R) + c(Ln R)^3
-                    LnR = math.log(R*1000.0)
-                    temp1 = 1/( a + b*LnR + c * ( math.pow( LnR, 3) ) ) - 273.15
-                    #print("Temperature T1 {} °C".format(temp1))
-                    #temp1 = 1*values[0]
-                    temp_avg = temp_avg + temp1
-                    n = n + 1
-                temp1 = temp_avg/NBR_SAMPLES
-                #print("Avg Temp1 {}".format(temp1))
-            except Exception as e:
-                temp1 = 999.9 
-                print("Exception Temperature T1 : " + str(e))
-                
-            try:
-                temp_avg = 0; n=0
-                while( n < NBR_SAMPLES ):
-                    #print("Start Temperature 2 conversion ADC")
-                    values[0] = adc_2.read_adc(1, gain=GAIN_T)
-                    #print("NTC Resistor 2 ADC value : {:02.1f}".format(values[0]))
-                    R2 = 1.5  # 1.5 KOhm
-                    Vin = 3    # 3V Vref
-                    vout = (values[0]/2047.0 )*1.024 #4.09
-                    #print("Vout : {:02.3f}".format(vout))
-                    R = R2 * ( (3.0 / vout) -1)
-                    #print("Resistor R : {:02.3f}".format(R))
-                    #1/T = a + b(Ln R) + c(Ln R)^3
-                    LnR = math.log(R*1000.0)
-                    temp2 = 1/( a + b*LnR + c * ( math.pow( LnR, 3) ) ) - 273.15
-                    #print("Temperature T2 {} °C".format(temp2))
-                    #temp2 = 1*values[0]
-                    temp_avg = temp_avg + temp2
-                    n = n + 1
-                temp2 = temp_avg/NBR_SAMPLES
-                #print("Avg Temp2 {}".format(temp2))
-            except Exception as e:
-                temp2= 999.9 
-                print("Exception Temperature T2 : " + str(e)) 
-                
-            try:
-                temp_avg = 0; n=0
-                while( n < NBR_SAMPLES ):
-                    #print("Start Temperature 2 conversion ADC")
-                    values[0] = adc_2.read_adc(2, gain=GAIN_T)
-                    #print("NTC Resistor 2 ADC value : {:02.1f}".format(values[0]))
-                    R2 = 1.5  # 1.5 KOhm
-                    Vin = 3    # 3V Vref
-                    vout = (values[0]/2047.0 )*1.024 #4.09
-                    #print("Vout : {:02.3f}".format(vout))
-                    R = R2 * ( (3.0 / vout) -1)
-                    #print("Resistor R : {:02.3f}".format(R))
-                    #1/T = a + b(Ln R) + c(Ln R)^3
-                    LnR = math.log(R*1000.0)
-                    temp3 = 1/( a + b*LnR + c * ( math.pow( LnR, 3) ) ) - 273.15
-                    #print("Temperature T3 {} °C".format(temp3))
-                    #temp3 = 1*values[0]
-                    temp_avg = temp_avg + temp3
-                    n = n + 1
-                temp3 = temp_avg/NBR_SAMPLES
-                #print("Avg Temp3 {}".format(temp3))
-            except Exception as e:
-                temp3= 999.9 
-                print("Exception Temperature T3 : " + str(e)) 
-                
-            try:
-                temp_avg = 0; n=0
-                while( n < NBR_SAMPLES ):
-                    #print("Start Temperature 2 conversion ADC")
-                    values[0] = adc_2.read_adc(3, gain=GAIN_T)
-                    #print("NTC Resistor 2 ADC value : {:02.1f}".format(values[0]))
-                    R2 = 1.5  # 1.5 KOhm
-                    Vin = 3    # 3V Vref
-                    vout = (values[0]/2047.0 )*1.024 #4.09
-                    #print("Vout : {:02.3f}".format(vout))
-                    R = R2 * ( (3.0 / vout) -1)
-                    #print("Resistor R : {:02.3f}".format(R))
-                    #1/T = a + b(Ln R) + c(Ln R)^3
-                    LnR = math.log(R*1000.0)
-                    temp4 = 1/( a + b*LnR + c * ( math.pow( LnR, 3) ) ) - 273.15
-                    #print("Temperature T4 {} °C".format(temp4))
-                    #temp4 = 1*values[0]
-                    temp_avg = temp_avg + temp4
-                    n = n + 1
-                temp4 = temp_avg/NBR_SAMPLES
-                #print("Avg Temp4 {}".format(temp4))
-            except Exception as e:
-                temp4= 999.9 
-                print("Exception Temperature T4 : " + str(e)) '''
-                
-                
             #--------------------------------------------------------------
             # Temperatures - ADC: Address 0x69
             start_time=time.time()
@@ -507,22 +286,11 @@ def tempPressPowerMethod(VOLT_TO_AMP = 30):   # Default 30A <==> 1 V
             for i in range(4): 
                 TempPress[i] = float("{:03.1f}".format(NTC_Temperatures[i])) 
             
-            '''TempPress[0] = float("{:03.1f}".format(temp1)) #temp1
-            TempPress[1] = float("{:03.1f}".format(temp2)) #temp2
-            TempPress[2] = float("{:03.1f}".format(temp3)) #temp13
-            TempPress[3] = float("{:03.1f}".format(temp4)) #temp4'''
-            
             # Pressure
             for j in range(4,7):
                 TempPress[j] = float("{:03.1f}".format(WNK83MA_Pressure[j-4])) 
-            '''TempPress[4] = float("{:03.1f}".format(press1)) #press1
-            TempPress[5] = float("{:03.1f}".format(press2)) #press2
-            TempPress[6] = float("{:03.1f}".format(press3)) #press3'''
             
-            TempPress[7] = float("{:03.1f}".format(POWER[0])) #press4
-            #print('Temp1: {:05.2f}, Temp2:{:05.2f}, Press1:{:05.2f}'.format(temp1, temp2, press1)  )
-            #print('\nTemp1: {:05.2f}, Temp2:{:05.2f}, Temp3:{:05.2f}, Temp4:{:05.2f}'.format(temp1, temp2, temp3, temp4)  )
-            #print('Press1:{:05.2f}, Press2:{:05.2f}, Press3:{:05.2f}, Press4:{:05.2f}'.format(press1, press2, press3, press4)  )
+            TempPress[7] = float("{:03.1f}".format(POWER[0])) 
             
             ttpp_logger.info('Temp1: {:05.2f}, Temp2:{:05.2f}, Temp3:{:05.2f}, Temp4:{:05.2f}'.format(NTC_Temperatures[0], NTC_Temperatures[1], NTC_Temperatures[2], NTC_Temperatures[3])  )
             ttpp_logger.info('Press1:{:05.2f}, Press2:{:05.2f}, Press3:{:05.2f}, Power:{:05.2f}'.format(WNK83MA_Pressure[0], WNK83MA_Pressure[1], WNK83MA_Pressure[2], POWER[0])  )

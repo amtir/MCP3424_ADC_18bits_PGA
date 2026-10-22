@@ -192,7 +192,7 @@ def tempPressPowerMethod(VOLT_TO_AMP = 30):   # Default 30A <==> 1 V
             #--------------------------------------------------------------
             # Power sensor, Power consumption
             MAX_V = 0.0
-            #VOLT_TO_AMP = CLS_Drinko_DEVICE.POWER_SENSOR #30
+            #VOLT_TO_AMP = CLS_DEVICE.POWER_SENSOR #30
             # Default 30A <==> 1 V   VOLT_TO_AMP = 30
             # Other possible sensors: 20A <==> 1V  or 10A <==> 1V
             U_RMS = 230

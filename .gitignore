@@ -1,0 +1,40 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+my_env/
+ENV/
+pyvenv.cfg
+
+# Packaging / PyInstaller
+build/
+*.egg-info/
+*.spec.bak
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Tests & tooling caches
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini

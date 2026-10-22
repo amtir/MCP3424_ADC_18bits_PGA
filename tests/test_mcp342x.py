@@ -2,7 +2,6 @@
 
 '''
     MCP3424 ADC 18bits with PGA
-    DROKOTEC
     A M.
     28-09-2022
 

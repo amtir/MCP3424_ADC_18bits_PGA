@@ -1,4 +1,5 @@
 import logging
+import os
 import sys
 from logging.handlers import TimedRotatingFileHandler, RotatingFileHandler
 
@@ -13,8 +14,8 @@ CRITICAL	  A serious error, indicating that the program itself may be unable to 
 '''
 
 FORMATTER = logging.Formatter("%(asctime)s — %(name)s — %(levelname)s — %(filename)s — %(funcName)s — %(lineno)s  — %(threadName)s — %(message)s")
-#LOG_FILE = "/home/drinkotec/pulseinside/logs/pulseinside.log"
-LOG_FILE = "/var/log/drinkotec/drinkotec.log"
+# Log file location (override with the MCP3424_LOG_FILE environment variable)
+LOG_FILE = os.environ.get("MCP3424_LOG_FILE", "/var/log/mcp3424/mcp3424.log")
 
 
 def get_console_handler():
